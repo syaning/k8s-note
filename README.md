@@ -1,5 +1,11 @@
 # k8s-note
 
+TOOLS
+
+- kubectl usage
+- kustomize
+- Enovy (Sidecar)
+- Istio
 
 MISC
 
@@ -30,3 +36,42 @@ NOTES
 QA
 
 - 集群外流量进入集群的方式：nodeport, loadbalancer, ingress, kubectl proxy, external ips
+- schedule pod to node: nodeName, nodeSelector, affinity
+
+---
+
+### Object
+
+- api group
+- api version
+- kind
+- name
+- namespace
+- labels
+- annotations
+
+### Pod
+
+- image: repository, tag, imagePullPolicy
+- container: command, args
+- resource limit, resource request: CPU, Memory
+- volume: pvc, projected
+- securityContext
+- probe: liveness, readiness
+- nodeSelector
+- initContainer
+- hooks: postStart, preStop
+- share process namespace
+
+### Service
+
+- service type
+- port
+- endpoint
+- headless service
+
+### Deployment
+
+### StatefulSet
+
+### ServiceAccount
