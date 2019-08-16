@@ -11,8 +11,10 @@ module.exports = {
       '/k8s/': [{
         title: '资源对象',
         children: [
+          'objects/node',
           'objects/namespace',
           'objects/pod',
+          'objects/deployment',
           'objects/service',
           'objects/endpoints',
           'objects/configmap',
