@@ -76,8 +76,6 @@ spec:
 
 更多详情参考 [Type ExternalName](https://kubernetes.io/docs/concepts/services-networking/service/#externalname)。
 
-## Headless Service
-
 ## 多端口
 
 一个 Service 可以对外暴露多个端口，此时应当为每个端口指定一个 `name`：
@@ -107,4 +105,83 @@ spec:
 
 详情参考 [Environment variables](https://kubernetes.io/docs/concepts/services-networking/service/#environment-variables)。
 
+由于对服务启动顺序有依赖，因此实际很少使用。
+
 ### DNS
+
+服务之间可以通过 `service-name.namespacee` 的方式来互相访问，如果两个服务在同一个 namespace 下，可以直接通过 `service-name` 来互相访问。
+
+例如：
+
+```bash
+$ kubectl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+nginx        ClusterIP   10.107.254.54   <none>        80/TCP    1d
+
+$ kubectl run -it --rm busybox --image=busybox:1.28.4 sh
+If you don't see a command prompt, try pressing enter.
+/ # wget http://nginx
+Connecting to nginx (10.107.254.54:80)
+index.html           100% |******************************|   612   0:00:00 ETA
+/ #
+/ # nslookup nginx.default
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      nginx.default
+Address 1: 10.107.254.54 nginx.default.svc.cluster.local
+```
+
+可以看到 DNS 解析 `nginx.default` 的地址就是 nginx Service 的 ClusterIP。
+
+更多详情参考 [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)。
+
+## Headless Service
+
+如果显式指定 `clusterIP` 为 `None`，那么创建出来的就是 Headless Service，通过这种方式用户可以定制负载均衡的方式。
+
+Headless Service 不会被自动分配 ClusterIP，而且 DNS 解析也会直接解析为 Pod 的地址。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  clusterIP: None
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+```
+
+```bash
+$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+nginx        ClusterIP   None         <none>        80/TCP    16s
+
+$ kubectl get po -owide
+NAME                     READY     STATUS    RESTARTS   AGE       IP          NODE
+nginx-65fc954674-lcvcj   1/1       Running   0          22s       10.1.0.62   docker-for-desktop
+nginx-65fc954674-nsnz2   1/1       Running   0          22s       10.1.0.60   docker-for-desktop
+nginx-65fc954674-s7rmj   1/1       Running   0          22s       10.1.0.61   docker-for-desktop
+
+$ kubectl run -it --rm busybox --image=busybox:1.28.4 sh
+If you don't see a command prompt, try pressing enter.
+/ # nslookup nginx.default
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      nginx.default
+Address 1: 10.1.0.62
+Address 2: 10.1.0.60
+Address 3: 10.1.0.61
+```
+
+## 对外提供服务
+
+- NodePort
+- LoadBalancer
+- [Ingress](./ingress.md)
