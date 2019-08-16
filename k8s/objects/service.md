@@ -105,4 +105,6 @@ spec:
 
 ### 环境变量
 
+详情参考 [Environment variables](https://kubernetes.io/docs/concepts/services-networking/service/#environment-variables)。
+
 ### DNS
