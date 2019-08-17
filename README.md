@@ -36,7 +36,13 @@ NOTES
 QA
 
 - 集群外流量进入集群的方式：nodeport, loadbalancer, ingress, kubectl proxy, external ips
-- schedule pod to node: nodeName, nodeSelector, affinity
+- schedule pod to node: nodeName, nodeSelector, affinity, taint & toleration
+
+Kubectl
+
+- -owide
+- -w
+- -ojsonpath
 
 ---
 
@@ -49,6 +55,8 @@ QA
 - namespace
 - labels
 - annotations
+- taint
+- tolerate
 
 ### Pod
 
@@ -62,13 +70,6 @@ QA
 - initContainer
 - hooks: postStart, preStop
 - share process namespace
-
-### Service
-
-- service type
-- port
-- endpoint
-- headless service
 
 ### Deployment
 
