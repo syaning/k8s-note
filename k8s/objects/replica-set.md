@@ -1,5 +1,9 @@
 # ReplicaSet
 
+[[toc]]
+
+## 介绍
+
 Replicaset 用来保证 Pod 的副本数总是与期望值相等。
 
 ```yaml
@@ -25,3 +29,8 @@ spec:
 ```
 
 一般很少直接使用 ReplicaSet，而是通过 [Deployment](./deployment.md) 来进行管理。
+
+## 参考
+
+- [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+- [ReplicationController](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/)

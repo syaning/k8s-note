@@ -185,3 +185,7 @@ Address 3: 10.1.0.61
 - NodePort
 - LoadBalancer
 - [Ingress](./ingress.md)
+
+## 参考
+
+- [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
