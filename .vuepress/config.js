@@ -1,12 +1,20 @@
 module.exports = {
   title: 'k8s note',
   themeConfig: {
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Kubernetes', link: '/k8s/' },
-      { text: 'Istio', link: '/istio/' },
-      { text: 'Github', link: 'https://github.com/syaning/k8s-note' }
-    ],
+    nav: [{
+      text: 'Home',
+      link: '/'
+    }, {
+      text: 'Notes',
+      items: [
+        { text: 'Kubernetes', link: '/k8s/' },
+        { text: 'Istio', link: '/istio/' },
+        { text: 'Ingress Nginx', link: '/ingress-nginx/' }
+      ]
+    }, {
+      text: 'Github',
+      link: 'https://github.com/syaning/k8s-note'
+    }],
     sidebar: {
       '/k8s/': [{
         title: '资源对象',
@@ -25,7 +33,8 @@ module.exports = {
           'objects/ingress'
         ]
       }],
-      '/istio/': []
+      '/istio/': [],
+      '/ingress-nginx/': []
     },
     sidebarDepth: 2
   }
