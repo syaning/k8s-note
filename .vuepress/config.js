@@ -9,7 +9,8 @@ module.exports = {
       items: [
         { text: 'Kubernetes', link: '/k8s/' },
         { text: 'Istio', link: '/istio/' },
-        { text: 'Ingress Nginx', link: '/ingress-nginx/' }
+        { text: 'Ingress Nginx', link: '/ingress-nginx/' },
+        { text: 'Prometheus', link: '/prometheus/' }
       ]
     }, {
       text: 'Github',
@@ -36,7 +37,8 @@ module.exports = {
         ]
       }],
       '/istio/': [],
-      '/ingress-nginx/': []
+      '/ingress-nginx/': [],
+      '/prometheus/': []
     },
     sidebarDepth: 2
   }
