@@ -1,5 +1,8 @@
 # DaemonSet
 
+[[toc]]
+
+## 创建 DaemonSet
 
 ```yaml
 apiVersion: apps/v1
@@ -56,3 +59,7 @@ fluentd-elasticsearch-8ckdj   1/1     Running   0          2m7s   10.244.2.40   
 fluentd-elasticsearch-hv4nl   1/1     Running   0          2m7s   10.244.0.6    test-02   <none>           <none>
 fluentd-elasticsearch-p78qr   1/1     Running   0          2m7s   10.244.1.25   test-03   <none>           <none>
 ```
+
+## 参考
+
+- [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
