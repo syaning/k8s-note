@@ -24,6 +24,7 @@ module.exports = {
           'objects/pod',
           'objects/replica-set',
           'objects/deployment',
+          'objects/stateful-set',
           'objects/daemon-set',
           'objects/horizontal-pod-autoscaler',
           'objects/service',
