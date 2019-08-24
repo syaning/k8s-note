@@ -79,15 +79,16 @@ effect 的取值为：
 - `PreferNoSchedule`：优先不调度
 - `NoExecute`：不调度到该节点，同时会驱逐已经调度到该节点的 Pod
 
-## Cordon
+## 管理
+
+### cordon / uncordon
+
+`cordon` 将节点标记为不可调度；`uncordon` 将节点重新标记为可调度。
 
 ```bash
-$ kubectl cordon $NODE_NAME
-```
-
-```
-NAME            STATUS                     ROLES    AGE   VERSION
-devops-nh-02d   Ready                      master   45d   v1.15.0
-devops-nh-03d   Ready                      <none>   45d   v1.15.0
-devops-nh-04d   Ready,SchedulingDisabled   <none>   45d   v1.15.0
+$ kubectl cordon test-03
+NAME      STATUS                     ROLES    AGE   VERSION
+test-01   Ready                      master   45d   v1.15.0
+test-02   Ready                      <none>   45d   v1.15.0
+test-03   Ready,SchedulingDisabled   <none>   45d   v1.15.0
 ```
