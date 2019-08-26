@@ -136,6 +136,46 @@ spec:
 
 ## 添加 imagePullSecret
 
+```bash
+$ kubectl create secret docker-registry private-registry \
+    --docker-username=admin \
+    --docker-password=admin \
+    --docker-email=admin@example.com \
+    --docker-server=https://127.0.0.1:5000
+
+$ kubectl create sa test-sa
+
+$ kubectl patch sa test-sa -p '{"imagePullSecrets": [{"name": "private-registry"}]}'
+
+$ kubectl get sa test-sa -oyaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: test-sa
+  namespace: default
+secrets:
+- name: test-sa-token-pmk8t
+imagePullSecrets:
+- name: private-registry
+```
+
+然后之后创建的 Pod 就会自动带上指定的 `imagePullSecrets`：
+
+```yaml
+$ kubectl get po nginx-7988dffbf-svfvh -oyaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-7988dffbf-svfvh
+  namespace: default
+spec:
+  containers:
+  - image: nginx:1.16
+    name: nginx
+  imagePullSecrets:
+  - name: private-registry
+```
+
 ## 参考
 
 - [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
