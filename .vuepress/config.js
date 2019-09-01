@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'k8s note',
+  title: 'Cloud Native Notes',
   themeConfig: {
     nav: [{
       text: 'Home',
@@ -8,8 +8,9 @@ module.exports = {
       text: 'Notes',
       items: [
         { text: 'Kubernetes', link: '/k8s/' },
-        { text: 'Istio', link: '/istio/' },
         { text: 'Ingress Nginx', link: '/ingress-nginx/' },
+        { text: 'Envoy', link: '/envoy/' },
+        { text: 'Istio', link: '/istio/' },
         { text: 'Prometheus', link: '/prometheus/' }
       ]
     }, {
@@ -36,10 +37,11 @@ module.exports = {
           'objects/ingress'
         ]
       }],
-      '/istio/': [],
       '/ingress-nginx/': [
         'getting-started'
       ],
+      '/envoy/': [],
+      '/istio/': [],
       '/prometheus/': []
     },
     sidebarDepth: 2
