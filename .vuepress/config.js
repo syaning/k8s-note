@@ -37,7 +37,9 @@ module.exports = {
         ]
       }],
       '/istio/': [],
-      '/ingress-nginx/': [],
+      '/ingress-nginx/': [
+        'getting-started'
+      ],
       '/prometheus/': []
     },
     sidebarDepth: 2
