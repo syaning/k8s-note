@@ -41,7 +41,19 @@ module.exports = {
         'getting-started'
       ],
       '/envoy/': [],
-      '/istio/': [],
+      '/istio/': [{
+        title: 'Setup',
+        children: [
+          'setup/install',
+          'setup/example'
+        ]
+      }, {
+        title: 'CRDs',
+        children: [
+          'crds/destination-rule',
+          'crds/virtual-service'
+        ]
+      }],
       '/prometheus/': []
     },
     sidebarDepth: 2
