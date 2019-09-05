@@ -129,6 +129,48 @@ spec:
 
 ### OutlierDetection
 
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews-cb-policy
+spec:
+  host: reviews.prod.svc.cluster.local
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http2MaxRequests: 1000
+        maxRequestsPerConnection: 10
+    outlierDetection:
+      consecutiveErrors: 7
+      interval: 5m
+      baseEjectionTime: 15m
+```
+
+### 根据端口设置
+
+可以针对不同的端口，设置不同的流量策略。例如：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: bookinfo-ratings-port
+spec:
+  host: ratings.prod.svc.cluster.local
+  trafficPolicy: # Apply to all ports
+    portLevelSettings:
+    - port:
+        number: 80
+      loadBalancer:
+        simple: LEAST_CONN
+    - port:
+        number: 9080
+      loadBalancer:
+        simple: ROUND_ROBIN
+```
 
 ## 参考
 
