@@ -1,0 +1,23 @@
+{
+  "name": "cloud-native-notes",
+  "version": "1.0.0",
+  "description": "Cloud native notes.",
+  "main": "README.md",
+  "scripts": {
+    "build": "vuepress build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syaning/k8s-note.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syaning/k8s-note/issues"
+  },
+  "homepage": "https://github.com/syaning/k8s-note#readme",
+  "devDependencies": {
+    "vuepress": "^1.0.4"
+  }
+}
