@@ -51,7 +51,8 @@ module.exports = {
         title: 'CRDs',
         children: [
           'crds/destination-rule',
-          'crds/virtual-service'
+          'crds/virtual-service',
+          'crds/service-entry'
         ]
       }],
       '/prometheus/': []
