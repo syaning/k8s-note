@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/k8s-note/',
   title: 'Cloud Native Notes',
   themeConfig: {
     nav: [{
