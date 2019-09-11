@@ -276,3 +276,7 @@ spec:
   imagePullSecrets:
   - name: private-registry
 ```
+
+## 参考
+
+- [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)

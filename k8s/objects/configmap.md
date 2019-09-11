@@ -183,3 +183,7 @@ spec:
 ```
 
 如果 ConfigMap 的数据发生更新，相应的 Volume 内容也会跟着自动更新。需要注意的是，使用了 `subPath` 的 Volume 内容不会自动更新。
+
+## 参考
+
+- [Configure a Pod to Use a ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)

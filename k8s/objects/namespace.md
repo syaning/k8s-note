@@ -4,7 +4,7 @@
 
 ## 简介
 
-Namespace 可以实现对部分资源的隔离，从而被不同的用户或用户组使用。例如 Deployment，Pod，Service 等资源是属于某一个 Namespace 的，而 Node，Persistent Volume 等资源则是全局的，不属于任何 Namespace。详情参考 [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)。
+Namespace 可以实现对部分资源的隔离，从而被不同的用户或用户组使用。例如 Deployment，Pod，Service 等资源是属于某一个 Namespace 的，而 Node，Persistent Volume 等资源则是全局的，不属于任何 Namespace。
 
 ```bash
 # 查看所有可以 Namespace 管理的资源
@@ -41,3 +41,7 @@ $ kubectl delete ns test-namespace
 ```
 
 `kubectl` 命令通过 `-n <namespace>` 选项可以管理相应 Namespace 下的资源，通过 `--all-namespaces` 选项可以管理所有 Namespace 下的资源。
+
+## 参考
+
+- [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)

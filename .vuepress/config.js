@@ -37,6 +37,11 @@ module.exports = {
           'objects/service-account',
           'objects/ingress'
         ]
+      }, {
+        title: '工具',
+        children: [
+          'tools/kubectl'
+        ]
       }],
       '/ingress-nginx/': [
         'getting-started'

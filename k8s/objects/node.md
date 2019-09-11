@@ -92,3 +92,8 @@ test-01   Ready                      master   45d   v1.15.0
 test-02   Ready                      <none>   45d   v1.15.0
 test-03   Ready,SchedulingDisabled   <none>   45d   v1.15.0
 ```
+
+## 参考
+
+- [Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
+- [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
