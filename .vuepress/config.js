@@ -38,6 +38,11 @@ module.exports = {
           'objects/ingress'
         ]
       }, {
+        title: 'Guides',
+        children: [
+          'guides/rbac'
+        ]
+      }, {
         title: '工具',
         children: [
           'tools/kubectl'
