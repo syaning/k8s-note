@@ -9,7 +9,8 @@ const k8sSidebar = {
     title: '集群信息',
     children: [
       'node',
-      'namespace'
+      'namespace',
+      'component-status'
     ]
   }, {
     title: 'Controller',
