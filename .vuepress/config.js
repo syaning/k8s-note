@@ -35,6 +35,10 @@ module.exports = {
           'objects/configmap',
           'objects/secret',
           'objects/service-account',
+          'objects/role',
+          'objects/cluster-role',
+          'objects/role-binding',
+          'objects/cluster-role-binding',
           'objects/ingress'
         ]
       }, {

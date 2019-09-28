@@ -134,6 +134,8 @@ spec:
         - containerPort: 80
 ```
 
+ServiceAccount 通常会和 Role 或者 ClusterRole 进行绑定，从而被赋予一定的权限，例如读取 Pod 信息等。详情查看 [RBAC](../guides/rbac.md)。
+
 ## 添加 imagePullSecret
 
 ```bash
