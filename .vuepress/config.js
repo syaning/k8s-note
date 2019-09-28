@@ -1,14 +1,72 @@
+const k8sSidebar = {
+  '/k8s/objects/': [{
+    title: 'Objects',
+    children: [
+      'pod',
+      'horizontal-pod-autoscaler'
+    ]
+  }, {
+    title: '集群信息',
+    children: [
+      'node',
+      'namespace'
+    ]
+  }, {
+    title: 'Controller',
+    children: [
+      'replica-set',
+      'deployment',
+      'stateful-set',
+      'daemon-set'
+    ]
+  }, {
+    title: '配置',
+    children: [
+      'configmap',
+      'secret',
+      'service-account'
+    ]
+  }, {
+    title: 'Service',
+    children: [
+      'service',
+      'endpoints',
+      'ingress'
+    ]
+  }, {
+    title: 'RBAC',
+    children: [
+      'role',
+      'cluster-role',
+      'role-binding',
+      'cluster-role-binding'
+    ]
+  }],
+  '/k8s/guides/': [
+    'rbac'
+  ],
+  '/k8s/tools/': [
+    'kubectl'
+  ]
+}
+
 module.exports = {
   base: '/k8s-note/',
-  title: 'Cloud Native Notes',
+  title: 'K8s Notes',
   themeConfig: {
     nav: [{
       text: 'Home',
       link: '/'
     }, {
+      text: 'Kubernetes',
+      items: [
+        { text: '资源对象', link: '/k8s/objects/' },
+        { text: 'Guides', link: '/k8s/guides/' },
+        { text: 'Tools', link: '/k8s/tools/' }
+      ]
+    }, {
       text: 'Notes',
       items: [
-        { text: 'Kubernetes', link: '/k8s/' },
         { text: 'Ingress Nginx', link: '/ingress-nginx/' },
         { text: 'Envoy', link: '/envoy/' },
         { text: 'Istio', link: '/istio/' },
@@ -19,39 +77,8 @@ module.exports = {
       link: 'https://github.com/syaning/k8s-note'
     }],
     sidebar: {
-      '/k8s/': [{
-        title: '资源对象',
-        children: [
-          'objects/node',
-          'objects/namespace',
-          'objects/pod',
-          'objects/replica-set',
-          'objects/deployment',
-          'objects/stateful-set',
-          'objects/daemon-set',
-          'objects/horizontal-pod-autoscaler',
-          'objects/service',
-          'objects/endpoints',
-          'objects/configmap',
-          'objects/secret',
-          'objects/service-account',
-          'objects/role',
-          'objects/cluster-role',
-          'objects/role-binding',
-          'objects/cluster-role-binding',
-          'objects/ingress'
-        ]
-      }, {
-        title: 'Guides',
-        children: [
-          'guides/rbac'
-        ]
-      }, {
-        title: '工具',
-        children: [
-          'tools/kubectl'
-        ]
-      }],
+      ...k8sSidebar,
+
       '/ingress-nginx/': [
         'getting-started'
       ],
