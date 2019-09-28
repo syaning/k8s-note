@@ -10,7 +10,8 @@ const k8sSidebar = {
     children: [
       'node',
       'namespace',
-      'component-status'
+      'component-status',
+      'event'
     ]
   }, {
     title: 'Controller',
