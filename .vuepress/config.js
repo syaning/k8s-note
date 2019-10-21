@@ -36,6 +36,11 @@ const k8sSidebar = {
       'ingress'
     ]
   }, {
+    title: 'Storage',
+    children: [
+      'persistent-volume'
+    ]
+  }, {
     title: 'RBAC',
     children: [
       'role',
