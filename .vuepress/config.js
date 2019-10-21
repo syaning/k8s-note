@@ -38,7 +38,8 @@ const k8sSidebar = {
   }, {
     title: 'Storage',
     children: [
-      'persistent-volume'
+      'persistent-volume',
+      'persistent-volume-claim'
     ]
   }, {
     title: 'RBAC',

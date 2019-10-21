@@ -1,1 +1,154 @@
 # Persistent Volume
+
+[[toc]]
+
+## Volume
+
+以下列出几种基础且常用的 Volume。更多详情参考 [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)。
+
+### configMap
+
+参考 [ConfigMap](./configmap.md)。
+
+### secret
+
+参考 [Secret](./secret.md)。
+
+### downwardAPI
+
+downwardAPI 可以将 Pod 或 Container 的字段作为 Volume 来使用，从而可以让运行的容器来获取这些信息。更多详情可参考 [Expose Pod Information to Containers Through Files](https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/)。
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+      annotations:
+        app-owner: alex
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "32Mi"
+        volumeMounts:
+        - name: podinfo
+          mountPath: /etc/podinfo          
+      volumes:
+      - name: podinfo
+        downwardAPI:
+          items:
+          - path: labels
+            fieldRef:
+              fieldPath: metadata.labels
+          - path: annotations
+            fieldRef:
+              fieldPath: metadata.annotations
+          - path: cpu_request
+            resourceFieldRef:
+              containerName: nginx
+              resource: requests.cpu
+              divisor: 1m
+          - path: mem_request
+            resourceFieldRef:
+              containerName: nginx
+              resource: requests.memory
+              divisor: 1Mi
+```
+
+### emptyDir
+
+emptyDir 在 Pod 被调度到 Node 上的时候创建，初始为空目录，并且存在于 Pod 的生命周期内。当 Pod 从 Node 上移除后，emptyDir 会被永久删除。主要适用于存放一些临时文件，而非持久化的数据。
+
+例如：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        emptyDir: {}
+```
+
+通常来说，emptyDir 可以使用任何存储介质，当然，也可以设置 `emptyDir.menium: Memory` 来使用 tmpfs（基于内存）。
+
+### hostPath
+
+可以将 Node 上的文件或目录，挂载到 Pod 中。通常需要将一些系统文件挂载到 Pod 内部时会用到。在使用 hostPath 的情况下，即使 Pod 被删除，hostPath 的文件依然存在。
+
+例如以下例子可以让 Pod 内使用当地时间：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        volumeMounts:
+        - name: timezone
+          mountPath: /ect/timezone
+        - name: localtime
+          mountPath: /etc/localtime
+      volumes:
+      - name: timezone
+        hostPath:
+          path: /etc/timezone
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+```
+
+hostPath 除了必需的 `path` 属性外，还可以设置 `type` 属性，详细可参考 [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)。
+
+### local
+
+### nfs
+
+### persistentVolumeClaim
+
+### projected
+
+## 参考
+
+- [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)
