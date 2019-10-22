@@ -147,6 +147,8 @@ hostPath 除了必需的 `path` 属性外，还可以设置 `type` 属性，详�
 
 ### persistentVolumeClaim
 
+参考 [Persistent Volume Claim](./persistent-volume-claim.md)。
+
 ### projected
 
 ## 参考
