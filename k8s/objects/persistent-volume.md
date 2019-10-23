@@ -143,8 +143,6 @@ hostPath 除了必需的 `path` 属性外，还可以设置 `type` 属性，详�
 
 ### local
 
-### nfs
-
 ### persistentVolumeClaim
 
 参考 [Persistent Volume Claim](./persistent-volume-claim.md)。
@@ -201,9 +199,11 @@ spec:
       - name: mysql-secret
         secret:
           secretName: mysql-secret
+```
 
----
+可以使用 `subPath` 的方式：
 
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -235,9 +235,11 @@ spec:
       - name: mysql-secret
         secret:
           secretName: mysql-secret
+```
 
----
+也可以使用 `projected` Volume，例如：
 
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -267,6 +269,13 @@ spec:
           - secret:
               name: mysql-secret
 ```
+
+`projected` Volume 支持：
+
+- `secret`
+- `configMap`
+- `downwardAPI`
+- `serviceAccountToken`
 
 ## 参考
 
