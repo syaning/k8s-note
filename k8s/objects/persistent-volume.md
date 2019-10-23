@@ -151,6 +151,123 @@ hostPath 除了必需的 `path` 属性外，还可以设置 `type` 属性，详�
 
 ### projected
 
+一般而言，多个 Volume 不能够挂载到同一个 MoutPath，例如如下就会报错：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-conf
+data:
+  mysql-host: mysql.middlewares.svc.cluster.local
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+data:
+  mysql-pass: cm9vdA==
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        volumeMounts:
+        - name: mysql-conf
+          mountPath: /ect/mysql
+        - name: mysql-secret
+          mountPath: /etc/mysql
+      volumes:
+      - name: mysql-conf
+        configMap:
+          name: mysql-conf
+      - name: mysql-secret
+        secret:
+          secretName: mysql-secret
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        volumeMounts:
+        - name: mysql-conf
+          mountPath: /etc/mysql/mysql-host
+          subPath: mysql-host
+        - name: mysql-secret
+          mountPath: /etc/mysql/mysql-pass
+          subPath: mysql-pass
+      volumes:
+      - name: mysql-conf
+        configMap:
+          name: mysql-conf
+      - name: mysql-secret
+        secret:
+          secretName: mysql-secret
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        volumeMounts:
+        - name: mysql
+          mountPath: /etc/mysql
+      volumes:
+      - name: mysql
+        projected:
+          sources:
+          - configMap:
+              name: mysql-conf
+          - secret:
+              name: mysql-secret
+```
+
 ## 参考
 
 - [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)
