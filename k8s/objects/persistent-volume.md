@@ -103,7 +103,7 @@ spec:
 
 ### hostPath
 
-可以将 Node 上的文件或目录，挂载到 Pod 中。通常需要将一些系统文件挂载到 Pod 内部时会用到。在使用 hostPath 的情况下，即使 Pod 被删除，hostPath 的文件依然存在。
+可以将 Node 上的文件或目录，挂载到 Pod 中。通常需要将一些系统文件挂载到 Pod 内部时会用到。在使用 `hostPath` 的情况下，即使 Pod 被删除，hostPath 的文件依然存在。
 
 例如以下例子可以让 Pod 内使用当地时间：
 
@@ -139,9 +139,81 @@ spec:
           path: /etc/localtime
 ```
 
-hostPath 除了必需的 `path` 属性外，还可以设置 `type` 属性，详细可参考 [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)。
+`hostPath` 除了必需的 `path` 属性外，还可以设置 `type` 属性，详细可参考 [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)。
 
 ### local
+
+`local` Volume 表示一个磁盘，分区或者一个目录。只能用于 static provisioning，不支持 dynamic provisioning（参考 [Lifecycle of a volume and claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#lifecycle-of-a-volume-and-claim)）。需要结合 `nodeAffinity` 特性来使用，因此相比于 `hostPath` 方式，不用手动指定 Pod 所应该被调度的 Node。
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-pv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /opt/local-pv
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - test-03
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-storage
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17.2
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: test
+          mountPath: /opt/data
+      volumes:
+      - name: test
+        persistentVolumeClaim:
+          claimName: nginx-pvc
+```
+
+此外，Rancher 提供的 [local-path-provisioner](https://github.com/rancher/local-path-provisioner) 与 `local` 比较类似，但是支持 dynamic provisioning.
 
 ### persistentVolumeClaim
 
@@ -280,3 +352,4 @@ spec:
 ## 参考
 
 - [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)
+- [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
