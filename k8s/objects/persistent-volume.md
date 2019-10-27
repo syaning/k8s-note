@@ -143,7 +143,7 @@ spec:
 
 ### local
 
-`local` Volume 表示一个磁盘，分区或者一个目录。只能用于 static provisioning，不支持 dynamic provisioning（参考 [Lifecycle of a volume and claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#lifecycle-of-a-volume-and-claim)）。需要结合 `nodeAffinity` 特性来使用，因此相比于 `hostPath` 方式，不用手动指定 Pod 所应该被调度的 Node。
+`local` Volume 表示一个磁盘，分区或者一个目录。只能用于 static provisioning，不支持 dynamic provisioning（参考 [Provisioning](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#provisioning)）。需要结合 `nodeAffinity` 特性来使用，因此相比于 `hostPath` 方式，不用手动指定 Pod 所应该被调度的 Node。
 
 ```yaml
 apiVersion: v1
@@ -348,6 +348,14 @@ spec:
 - `configMap`
 - `downwardAPI`
 - `serviceAccountToken`
+
+## 生命周期
+
+### Provisioning
+
+### Binding
+
+### Using
 
 ## 参考
 
