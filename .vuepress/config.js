@@ -93,6 +93,11 @@ module.exports = {
       ],
       '/envoy/': [],
       '/istio/': [{
+        title: 'Guides',
+        children: [
+          'guides/service-mesh'
+        ]
+      }, {
         title: 'Setup',
         children: [
           'setup/install',
