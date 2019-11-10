@@ -108,6 +108,7 @@ module.exports = {
         children: [
           'crds/destination-rule',
           'crds/virtual-service',
+          'crds/gateway',
           'crds/service-entry'
         ]
       }],
