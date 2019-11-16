@@ -70,3 +70,8 @@ spec:
           serviceName: httpbin
           servicePort: 80
 ```
+
+## 配置
+
+- 通过 ConfigMap 可以进行全局配置
+- 通过 Annotations 可以配置单个 Ingress

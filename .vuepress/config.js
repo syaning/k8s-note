@@ -88,9 +88,15 @@ module.exports = {
     sidebar: {
       ...k8sSidebar,
 
-      '/ingress-nginx/': [
-        'getting-started'
-      ],
+      '/ingress-nginx/': [{
+        title: 'Ingress Nginx',
+        collapsable: false,
+        children: [
+          'getting-started',
+          'configmap',
+          'annotations'
+        ]
+      }],
       '/envoy/': [],
       '/istio/': [{
         title: 'Guides',
