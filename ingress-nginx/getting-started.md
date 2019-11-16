@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-$ helm install stable/nginx-ingress --name nginx --namespace ingress-nginx
+$ helm install stable/nginx-ingress --name nginx --namespace ingress
 ```
 
 更多参考 [Installation Guide](https://kubernetes.github.io/ingress-nginx/deploy/)
@@ -73,5 +73,5 @@ spec:
 
 ## 配置
 
-- 通过 ConfigMap 可以进行全局配置
-- 通过 Annotations 可以配置单个 Ingress
+- 通过 [ConfigMap](./configmap.md) 可以进行全局配置
+- 通过 [Annotations](./annotations.md) 可以配置单个 Ingress
