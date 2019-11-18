@@ -1,12 +1,14 @@
 const k8sSidebar = {
   '/k8s/objects/': [{
     title: 'Objects',
+    collapsable: false,
     children: [
       'pod',
       'horizontal-pod-autoscaler'
     ]
   }, {
     title: '集群信息',
+    collapsable: false,
     children: [
       'node',
       'namespace',
@@ -15,6 +17,7 @@ const k8sSidebar = {
     ]
   }, {
     title: 'Controller',
+    collapsable: false,
     children: [
       'replica-set',
       'deployment',
@@ -23,6 +26,7 @@ const k8sSidebar = {
     ]
   }, {
     title: '配置',
+    collapsable: false,
     children: [
       'configmap',
       'secret',
@@ -30,6 +34,7 @@ const k8sSidebar = {
     ]
   }, {
     title: 'Service',
+    collapsable: false,
     children: [
       'service',
       'endpoints',
@@ -37,6 +42,7 @@ const k8sSidebar = {
     ]
   }, {
     title: 'Storage',
+    collapsable: false,
     children: [
       'persistent-volume',
       'persistent-volume-claim',
@@ -44,6 +50,7 @@ const k8sSidebar = {
     ]
   }, {
     title: 'RBAC',
+    collapsable: false,
     children: [
       'role',
       'cluster-role',
