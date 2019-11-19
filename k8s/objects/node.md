@@ -93,7 +93,19 @@ test-02   Ready                      <none>   45d   v1.15.0
 test-03   Ready,SchedulingDisabled   <none>   45d   v1.15.0
 ```
 
+### drain
+
+如果需要讲一个 Node 从集群中移除，则需要先执行 `kubectl drain <node name>` 操作。该操作会：
+
+- 标记该 Node 为不可调度 (`kubectl cordon <node name>`)
+- 驱逐该 Node 上的 Pod
+
+通过 `--ignore-daemonsets` 可以忽略 DaemonSet；如果有 Pod 使用本地存储，例如 emptyDir，可以使用 `--delete-local-data` 参数。
+
+`drain` 操作结束后，即可将 Node 从集群中移除。如果想要 Node 继续使用，可以通过 `kubectl uncordon <node name>`.
+
 ## 参考
 
 - [Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
 - [Taints and Tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
+- [Safely Drain a Node while Respecting the PodDisruptionBudget](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
