@@ -71,6 +71,32 @@ const k8sSidebar = {
   ]
 }
 
+const istioSidebar = {
+  '/istio/': [{
+    title: 'Guides',
+    collapsable: false,
+    children: [
+      'guides/service-mesh'
+    ]
+  }, {
+    title: 'Setup',
+    collapsable: false,
+    children: [
+      'setup/install',
+      'setup/example'
+    ]
+  }, {
+    title: 'CRDs',
+    collapsable: false,
+    children: [
+      'crds/destination-rule',
+      'crds/virtual-service',
+      'crds/gateway',
+      'crds/service-entry'
+    ]
+  }],
+}
+
 module.exports = {
   base: '/k8s-note/',
   title: 'K8s Notes',
@@ -99,7 +125,7 @@ module.exports = {
     }],
     sidebar: {
       ...k8sSidebar,
-
+      ...istioSidebar,
       '/ingress-nginx/': [{
         title: 'Ingress Nginx',
         collapsable: false,
@@ -110,26 +136,6 @@ module.exports = {
         ]
       }],
       '/envoy/': [],
-      '/istio/': [{
-        title: 'Guides',
-        children: [
-          'guides/service-mesh'
-        ]
-      }, {
-        title: 'Setup',
-        children: [
-          'setup/install',
-          'setup/example'
-        ]
-      }, {
-        title: 'CRDs',
-        children: [
-          'crds/destination-rule',
-          'crds/virtual-service',
-          'crds/gateway',
-          'crds/service-entry'
-        ]
-      }],
       '/prometheus/': []
     },
     sidebarDepth: 2
