@@ -58,9 +58,14 @@ const k8sSidebar = {
       'cluster-role-binding'
     ]
   }],
-  '/k8s/guides/': [
-    'rbac'
-  ],
+  '/k8s/guides/': [{
+    title: 'Guides',
+    collapsable: false,
+    children: [
+      'rbac',
+      'gpu'
+    ]
+  }],
   '/k8s/tools/': [
     'kubectl'
   ]
