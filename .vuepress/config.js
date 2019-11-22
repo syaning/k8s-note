@@ -57,6 +57,12 @@ const k8sSidebar = {
       'role-binding',
       'cluster-role-binding'
     ]
+  }, {
+    title: '策略',
+    collapsable: false,
+    children: [
+      'resource-quota'
+    ]
   }],
   '/k8s/guides/': [{
     title: 'Guides',
