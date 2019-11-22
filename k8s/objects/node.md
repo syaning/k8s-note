@@ -104,6 +104,8 @@ test-03   Ready,SchedulingDisabled   <none>   45d   v1.15.0
 
 `drain` 操作结束后，即可将 Node 从集群中移除。如果想要 Node 继续使用，可以通过 `kubectl uncordon <node name>`.
 
+该操作在驱逐 Pod 的时候，会遵循 [PodDisruptionBudget](./pod-disruption-budget.md)
+
 ## 参考
 
 - [Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)
