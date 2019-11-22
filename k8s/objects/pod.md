@@ -99,18 +99,65 @@ status:
 
 ### Probe
 
-### Init Container
+可以为 Pod 内的容器设置探针，检测容器的状态。
+
+有如下三种探针：
+
+- `livenessProbe`: 检测容器是否运行。如果检测失败，那么 kubelet 会 kill 掉容器
+- `readinessProbe`: 检测容器是否可以接收请求。如果检测失败，那么 endpoints controller 会从 Service 的 endpoints 列表中移除该 Pod 的 IP
+- `startupProbe`: 检测容器内的应用是否已经起来，在该探针检测成功之前，其它探针都会被禁用。对于一些启动比较慢的应用，可以使用该探针，从而避免 `livenessProbe` 过早检测失败导致频繁重启
+
+探针可以执行以下三种操作：
+
+- 执行一条命令，状态码为0则成功
+- TCP端口，可以连接则成功
+- HTTP Get 请求，返回码为 2xx 或者 3xx 则成功
+
+例如：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: goproxy
+  labels:
+    app: goproxy
+spec:
+  containers:
+  - name: goproxy
+    image: k8s.gcr.io/goproxy:0.1
+    ports:
+    - containerPort: 8080
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 20
+```
 
 ### Restart Policy
 
+`restartPolicy` 对 Pod 内的所有容器都生效，可取值为：
+
+- `Always` (默认值)
+- `OnFailure`
+- `Never`
+
+## Init Container
+
+
 ## 调度
 
-- nodeName
-- nodeSelector
-- affinity
+参考 [Pod 调度](../guides/pod-schedule.md)。
 
 ## 参考
 
 - [Pod Overview](https://kubernetes.io/docs/concepts/workloads/pods/)
 - [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
 - [Pod Lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+- [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)

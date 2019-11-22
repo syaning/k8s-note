@@ -69,6 +69,7 @@ const k8sSidebar = {
     title: 'Guides',
     collapsable: false,
     children: [
+      'pod-schedule',
       'rbac',
       'gpu'
     ]
