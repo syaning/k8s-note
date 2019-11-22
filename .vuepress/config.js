@@ -61,7 +61,8 @@ const k8sSidebar = {
     title: '策略',
     collapsable: false,
     children: [
-      'resource-quota'
+      'resource-quota',
+      'pod-disruption-budget'
     ]
   }],
   '/k8s/guides/': [{
