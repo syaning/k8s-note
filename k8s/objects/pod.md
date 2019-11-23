@@ -12,7 +12,7 @@
 - 很少直接使用 Pod，一般都是通过 Controller 来使用
 - Pod template 也通常不直接使用，而是放在 Controller template 里
 
-## 生命周期
+## Pod 生命周期
 
 ### Status
 
@@ -97,6 +97,26 @@ status:
   phase: Running
 ```
 
+### Restart Policy
+
+`restartPolicy` 对 Pod 内的所有容器都生效，可取值为：
+
+- `Always` (默认值)
+- `OnFailure`
+- `Never`
+
+## 容器管理
+
+### imagePullPolicy
+
+### 端口
+
+### 环境变量
+
+### 资源限制
+
+### Volume 挂载
+
 ### Probe
 
 可以为 Pod 内的容器设置探针，检测容器的状态。
@@ -140,16 +160,9 @@ spec:
       periodSeconds: 20
 ```
 
-### Restart Policy
-
-`restartPolicy` 对 Pod 内的所有容器都生效，可取值为：
-
-- `Always` (默认值)
-- `OnFailure`
-- `Never`
+### hooks
 
 ## Init Container
-
 
 ## 调度
 
