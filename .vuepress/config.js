@@ -49,6 +49,13 @@ const k8sSidebar = {
       'storage-class'
     ]
   }, {
+    title: 'Job',
+    collapsable: false,
+    children: [
+      'job',
+      'cronjob'
+    ]
+  }, {
     title: 'RBAC',
     collapsable: false,
     children: [

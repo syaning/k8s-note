@@ -109,7 +109,13 @@ status:
 
 ### imagePullPolicy
 
-### 端口
+`imagePullPolicy` 指定了镜像的拉取策略，可取值为：
+
+- `Always`
+- `Never`
+- `IfNotPresent`
+
+如果使用的镜像 tag 为 `latest`，则默认值为 `Always`，否则默认值为 `IfNotPresent`。
 
 ### 环境变量
 
