@@ -119,6 +119,40 @@ status:
 
 ### 环境变量
 
+环境变量可以来自于：
+
+- 直接设置的值
+- ConfigMap / Secret
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-service
+spec:
+  containers:
+  - name: my-service
+    image: my-service
+    env:
+    - name: MYSQL_HOST
+      valueFrom:
+        configMapRef:
+          name: mysql-conf
+          key: host
+    - name: MYSQL_PORT
+      value: "3306"
+    - name: USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: mysql-secret
+          key: username
+    - name: PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysql-secret
+          key: password
+```
+
 ### 资源限制
 
 ```yaml
@@ -202,11 +236,23 @@ spec:
 
 ## QoS
 
+在创建一个 Pod 后，会自动为该 Pod 分配一个 QoS (Quality of Service) 等级。QoS 有如下三种：
+
+- `Guaranteed`：Pod 中的每个容器都设置了 CPU 和 Memory 的请求和限制，且请求和限制的值相等
+- `Burstable`：Pod 中至少有一个容器的资源设置不满足 `Guaranteed`
+- `BestEffort`：Pod 中每一个容器都没有设置 CPU 和 Memory 的请求和限制
+
 更多信息参考 [Configure Quality of Service for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/).
 
 ## 调度
 
 参考 [Pod 调度](../guides/pod-schedule.md)。
+
+## 网络配置
+
+### hostNetwork
+
+### dnsPolicy
 
 ## 参考
 
