@@ -121,6 +121,36 @@ status:
 
 ### 资源限制
 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-service
+spec:
+  containers:
+  - name: my-service
+    image: my-service
+    resources:
+      limits:
+        cpu: "1"
+        memory: "200Mi"
+      requests:
+        cpu: "500m"
+        memory: "100Mi"
+```
+
+其中：
+
+- cpu 可以是数字，表示核数；也可以是类似 `500m` 的形式，`1000m` 与 `1` 含义相同
+- memory 可以是数字，表示 bytes；也可以带后缀作为单位，可选值为 `E, P, T, G, M, K, Ei, Pi, Ti, Gi, Mi, Ki`
+
+更多内容可以参考：
+
+- [Assign Memory Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/)
+- [Assign CPU Resources to Containers and Pods](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/)
+
+如果需要使用 GPU 资源，参考 [GPU](../guides/gpu.md).
+
 ### Volume 挂载
 
 ### Probe
@@ -169,6 +199,10 @@ spec:
 ### hooks
 
 ## Init Container
+
+## QoS
+
+更多信息参考 [Configure Quality of Service for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/).
 
 ## 调度
 
