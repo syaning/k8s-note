@@ -117,6 +117,8 @@ status:
 
 如果使用的镜像 tag 为 `latest`，则默认值为 `Always`，否则默认值为 `IfNotPresent`。
 
+### 端口
+
 ### 环境变量
 
 环境变量可以来自于：
@@ -187,6 +189,8 @@ spec:
 
 ### Volume 挂载
 
+参考 [Persistent Volume](./persistent-volume.md).
+
 ### Probe
 
 可以为 Pod 内的容器设置探针，检测容器的状态。
@@ -253,6 +257,12 @@ spec:
 ### hostNetwork
 
 ### dnsPolicy
+
+### dnsConfig
+
+### hostAliases
+
+参考 [Adding entries to Pod /etc/hosts with HostAliases](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/).
 
 ## 参考
 
