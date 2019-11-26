@@ -260,3 +260,4 @@ spec:
 - [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
 - [Pod Lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 - [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+- [Init Containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
