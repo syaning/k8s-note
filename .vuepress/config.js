@@ -1,148 +1,88 @@
-const k8sSidebar = {
-  '/k8s/objects/': [{
-    title: 'Objects',
-    collapsable: false,
-    children: [
-      'pod',
-      'horizontal-pod-autoscaler'
-    ]
-  }, {
-    title: '集群信息',
-    collapsable: false,
-    children: [
-      'node',
-      'namespace',
-      'component-status',
-      'event'
-    ]
-  }, {
-    title: 'Controller',
-    collapsable: false,
-    children: [
-      'replica-set',
-      'deployment',
-      'stateful-set',
-      'daemon-set'
-    ]
-  }, {
-    title: '配置',
-    collapsable: false,
-    children: [
-      'configmap',
-      'secret',
-      'service-account'
-    ]
-  }, {
-    title: 'Service',
-    collapsable: false,
-    children: [
-      'service',
-      'endpoints',
-      'ingress'
-    ]
-  }, {
-    title: 'Storage',
-    collapsable: false,
-    children: [
-      'persistent-volume',
-      'persistent-volume-claim',
-      'storage-class'
-    ]
-  }, {
-    title: 'Job',
-    collapsable: false,
-    children: [
-      'job',
-      'cronjob'
-    ]
-  }, {
-    title: 'RBAC',
-    collapsable: false,
-    children: [
-      'role',
-      'cluster-role',
-      'role-binding',
-      'cluster-role-binding'
-    ]
-  }, {
-    title: '策略',
-    collapsable: false,
-    children: [
-      'resource-quota',
-      'pod-disruption-budget'
-    ]
-  }],
-  '/k8s/guides/': [{
-    title: 'Guides',
-    collapsable: false,
-    children: [
-      'components',
-      'api',
-      'pod-schedule',
-      'rbac',
-      'gpu'
-    ]
-  }],
-  '/k8s/tools/': [
-    'kubectl'
-  ]
-}
-
-const istioSidebar = {
-  '/istio/': [{
-    title: 'Guides',
-    collapsable: false,
-    children: [
-      'guides/service-mesh'
-    ]
-  }, {
-    title: 'Setup',
-    collapsable: false,
-    children: [
-      'setup/install',
-      'setup/example'
-    ]
-  }, {
-    title: 'CRDs',
-    collapsable: false,
-    children: [
-      'crds/destination-rule',
-      'crds/virtual-service',
-      'crds/gateway',
-      'crds/service-entry'
-    ]
-  }],
-}
-
 module.exports = {
   base: '/k8s-note/',
   title: 'K8s Notes',
   themeConfig: {
+    logo: '/logo.svg',
     nav: [{
-      text: 'Home',
-      link: '/'
-    }, {
-      text: 'Kubernetes',
-      items: [
-        { text: '资源对象', link: '/k8s/objects/' },
-        { text: 'Guides', link: '/k8s/guides/' },
-        { text: 'Tools', link: '/k8s/tools/' }
-      ]
-    }, {
       text: 'Notes',
       items: [
+        { text: 'Kubernetes', link: '/k8s/' },
         { text: 'Ingress Nginx', link: '/ingress-nginx/' },
         { text: 'Envoy', link: '/envoy/' },
         { text: 'Istio', link: '/istio/' },
         { text: 'Prometheus', link: '/prometheus/' }
       ]
-    }, {
-      text: 'Github',
-      link: 'https://github.com/syaning/k8s-note'
     }],
     sidebar: {
-      ...k8sSidebar,
-      ...istioSidebar,
+      '/k8s/': [{
+        title: '资源对象',
+        children: [
+          'objects/pod',
+          'objects/horizontal-pod-autoscaler',
+          'objects/node',
+          'objects/namespace',
+          'objects/component-status',
+          'objects/event',
+          'objects/replica-set',
+          'objects/deployment',
+          'objects/stateful-set',
+          'objects/daemon-set',
+          'objects/configmap',
+          'objects/secret',
+          'objects/service-account',
+          'objects/service',
+          'objects/endpoints',
+          'objects/ingress',
+          'objects/persistent-volume',
+          'objects/persistent-volume-claim',
+          'objects/storage-class',
+          'objects/job',
+          'objects/cronjob',
+          'objects/role',
+          'objects/cluster-role',
+          'objects/role-binding',
+          'objects/cluster-role-binding',
+          'objects/resource-quota',
+          'objects/pod-disruption-budget'
+        ]
+      }, {
+        title: 'Guides',
+        children: [
+          'guides/components',
+          'guides/api',
+          'guides/pod-schedule',
+          'guides/rbac',
+          'guides/gpu'
+        ]
+      }, {
+        title: 'Tools',
+        children: [
+          'tools/kubectl'
+        ]
+      }],
+      '/istio/': [{
+        title: 'Guides',
+        collapsable: false,
+        children: [
+          'guides/service-mesh'
+        ]
+      }, {
+        title: 'Setup',
+        collapsable: false,
+        children: [
+          'setup/install',
+          'setup/example'
+        ]
+      }, {
+        title: 'CRDs',
+        collapsable: false,
+        children: [
+          'crds/destination-rule',
+          'crds/virtual-service',
+          'crds/gateway',
+          'crds/service-entry'
+        ]
+      }],
       '/ingress-nginx/': [{
         title: 'Ingress Nginx',
         collapsable: false,
@@ -155,6 +95,9 @@ module.exports = {
       '/envoy/': [],
       '/prometheus/': []
     },
-    sidebarDepth: 2
+    sidebarDepth: 2,
+    lastUpdated: true,
+    repo: 'syaning/k8s-note',
+    editLinks: true
   }
 }
