@@ -15,4 +15,5 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: .vuepress/dist
+        BASEURL: /k8s-note/
         BUILD_SCRIPT: npm install && npm run build

@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/k8s-note/',
+  base: process.env.BASEURL || '/',
   title: 'K8s Notes',
   themeConfig: {
     logo: '/logo.svg',
