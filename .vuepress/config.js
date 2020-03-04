@@ -95,7 +95,7 @@ module.exports = {
       '/envoy/': [],
       '/prometheus/': []
     },
-    sidebarDepth: 2,
+    sidebarDepth: 1,
     lastUpdated: true,
     repo: 'syaning/k8s-note',
     editLinks: true
