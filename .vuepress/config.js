@@ -17,6 +17,7 @@ module.exports = {
       '/k8s/': [{
         title: '资源对象',
         children: [
+          'objects/',
           'objects/pod',
           'objects/horizontal-pod-autoscaler',
           'objects/node',
