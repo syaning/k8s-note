@@ -8,7 +8,7 @@
 - Pod 内的容器共享网络和存储，互相之间可以通过 `localhost` 来进行通信
 - Pod是非持久的、一次性的 (ephemeral, disposable)
 - Pod 不会自愈，当一个 Pod 失败后，会被删除
-- Controller（例如 Deployment，StatefulSet，DaemonSet）用于管理 Pod，对 Pod 进行调度，复本管理，滚动升级等
+- Controller（例如 Deployment，StatefulSet，DaemonSet）用于管理 Pod，对 Pod 进行调度，副本管理，滚动升级等
 - 很少直接使用 Pod，一般都是通过 Controller 来使用
 - Pod template 也通常不直接使用，而是放在 Controller template 里
 
