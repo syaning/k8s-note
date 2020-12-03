@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DestinationRule | K8s Notes</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/k8s-note/assets/css/0.styles.7b106626.css" as="style"><link rel="preload" href="/k8s-note/assets/js/app.dbdda441.js" as="script"><link rel="preload" href="/k8s-note/assets/js/2.7eb27d3f.js" as="script"><link rel="preload" href="/k8s-note/assets/js/16.f9a9bbc3.js" as="script"><link rel="prefetch" href="/k8s-note/assets/js/10.73617207.js"><link rel="prefetch" href="/k8s-note/assets/js/11.10bd6547.js"><link rel="prefetch" href="/k8s-note/assets/js/12.a735ef23.js"><link rel="prefetch" href="/k8s-note/assets/js/13.7eeef935.js"><link rel="prefetch" href="/k8s-note/assets/js/14.4950affd.js"><link rel="prefetch" href="/k8s-note/assets/js/15.9f53e9ec.js"><link rel="prefetch" href="/k8s-note/assets/js/17.abd6ba53.js"><link rel="prefetch" href="/k8s-note/assets/js/18.cc9785d8.js"><link rel="prefetch" href="/k8s-note/assets/js/19.fe40932e.js"><link rel="prefetch" href="/k8s-note/assets/js/20.cafa9da6.js"><link rel="prefetch" href="/k8s-note/assets/js/21.04ae71f5.js"><link rel="prefetch" href="/k8s-note/assets/js/22.60a73f3d.js"><link rel="prefetch" href="/k8s-note/assets/js/23.a87681d4.js"><link rel="prefetch" href="/k8s-note/assets/js/24.a436133f.js"><link rel="prefetch" href="/k8s-note/assets/js/25.29bf5d48.js"><link rel="prefetch" href="/k8s-note/assets/js/26.4c6fbe53.js"><link rel="prefetch" href="/k8s-note/assets/js/27.a2384463.js"><link rel="prefetch" href="/k8s-note/assets/js/28.9df3df90.js"><link rel="prefetch" href="/k8s-note/assets/js/29.261caceb.js"><link rel="prefetch" href="/k8s-note/assets/js/3.6c481844.js"><link rel="prefetch" href="/k8s-note/assets/js/30.f2cc12ff.js"><link rel="prefetch" href="/k8s-note/assets/js/31.7431be70.js"><link rel="prefetch" href="/k8s-note/assets/js/32.37604ed6.js"><link rel="prefetch" href="/k8s-note/assets/js/33.333c32f7.js"><link rel="prefetch" href="/k8s-note/assets/js/34.ef0017bb.js"><link rel="prefetch" href="/k8s-note/assets/js/35.128101ae.js"><link rel="prefetch" href="/k8s-note/assets/js/36.2dea94ee.js"><link rel="prefetch" href="/k8s-note/assets/js/37.61aadd91.js"><link rel="prefetch" href="/k8s-note/assets/js/38.57c0449d.js"><link rel="prefetch" href="/k8s-note/assets/js/39.f65ae849.js"><link rel="prefetch" href="/k8s-note/assets/js/4.04458bdc.js"><link rel="prefetch" href="/k8s-note/assets/js/40.a452f293.js"><link rel="prefetch" href="/k8s-note/assets/js/41.2f459375.js"><link rel="prefetch" href="/k8s-note/assets/js/42.853dba7e.js"><link rel="prefetch" href="/k8s-note/assets/js/43.8385464d.js"><link rel="prefetch" href="/k8s-note/assets/js/44.e21bb4f3.js"><link rel="prefetch" href="/k8s-note/assets/js/45.0cfa0906.js"><link rel="prefetch" href="/k8s-note/assets/js/46.443a9dab.js"><link rel="prefetch" href="/k8s-note/assets/js/47.7ca01a39.js"><link rel="prefetch" href="/k8s-note/assets/js/48.d20b3ad1.js"><link rel="prefetch" href="/k8s-note/assets/js/49.4b3ad4f0.js"><link rel="prefetch" href="/k8s-note/assets/js/5.fc791712.js"><link rel="prefetch" href="/k8s-note/assets/js/50.f109d804.js"><link rel="prefetch" href="/k8s-note/assets/js/51.116368dd.js"><link rel="prefetch" href="/k8s-note/assets/js/52.eec3625c.js"><link rel="prefetch" href="/k8s-note/assets/js/53.2119f1f2.js"><link rel="prefetch" href="/k8s-note/assets/js/54.44f81280.js"><link rel="prefetch" href="/k8s-note/assets/js/55.0ed61643.js"><link rel="prefetch" href="/k8s-note/assets/js/56.8a41ae6c.js"><link rel="prefetch" href="/k8s-note/assets/js/57.df1e26c5.js"><link rel="prefetch" href="/k8s-note/assets/js/58.3110f76e.js"><link rel="prefetch" href="/k8s-note/assets/js/59.f595ea8c.js"><link rel="prefetch" href="/k8s-note/assets/js/6.2cb68e23.js"><link rel="prefetch" href="/k8s-note/assets/js/60.20456f68.js"><link rel="prefetch" href="/k8s-note/assets/js/7.6fd5dc50.js"><link rel="prefetch" href="/k8s-note/assets/js/8.9e8d07cd.js"><link rel="prefetch" href="/k8s-note/assets/js/9.14ea67dc.js">
+    <link rel="stylesheet" href="/k8s-note/assets/css/0.styles.7b106626.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/k8s-note/" class="home-link router-link-active"><img src="/k8s-note/logo.svg" alt="K8s Notes" class="logo"> <span class="site-name can-hide">K8s Notes</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Notes" class="dropdown-title"><span class="title">Notes</span> <span class="arrow down"></span></button> <button type="button" aria-label="Notes" class="mobile-dropdown-title"><span class="title">Notes</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/k8s-note/k8s/" class="nav-link">
+  Kubernetes
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/docker/image/" class="nav-link">
+  Docker
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/ingress-nginx/" class="nav-link">
+  Ingress Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/envoy/" class="nav-link">
+  Envoy
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/istio/" class="nav-link router-link-active">
+  Istio
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/prometheus/" class="nav-link">
+  Prometheus
+</a></li></ul></div></div> <a href="https://github.com/syaning/k8s-note" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Notes" class="dropdown-title"><span class="title">Notes</span> <span class="arrow down"></span></button> <button type="button" aria-label="Notes" class="mobile-dropdown-title"><span class="title">Notes</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/k8s-note/k8s/" class="nav-link">
+  Kubernetes
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/docker/image/" class="nav-link">
+  Docker
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/ingress-nginx/" class="nav-link">
+  Ingress Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/envoy/" class="nav-link">
+  Envoy
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/istio/" class="nav-link router-link-active">
+  Istio
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/prometheus/" class="nav-link">
+  Prometheus
+</a></li></ul></div></div> <a href="https://github.com/syaning/k8s-note" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Guides</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/k8s-note/istio/guides/service-mesh.html" class="sidebar-link">Service Mesh</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Setup</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/k8s-note/istio/setup/install.html" class="sidebar-link">Install</a></li><li><a href="/k8s-note/istio/setup/example.html" class="sidebar-link">Example</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>CRDs</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/k8s-note/istio/crds/destination-rule.html" aria-current="page" class="active sidebar-link">DestinationRule</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-note/istio/crds/destination-rule.html#简介" class="sidebar-link">简介</a></li><li class="sidebar-sub-header"><a href="/k8s-note/istio/crds/destination-rule.html#基本配置" class="sidebar-link">基本配置</a></li><li class="sidebar-sub-header"><a href="/k8s-note/istio/crds/destination-rule.html#subset" class="sidebar-link">Subset</a></li><li class="sidebar-sub-header"><a href="/k8s-note/istio/crds/destination-rule.html#traffic-policy" class="sidebar-link">Traffic Policy</a></li><li class="sidebar-sub-header"><a href="/k8s-note/istio/crds/destination-rule.html#参考" class="sidebar-link">参考</a></li></ul></li><li><a href="/k8s-note/istio/crds/virtual-service.html" class="sidebar-link">VirtualService</a></li><li><a href="/k8s-note/istio/crds/gateway.html" class="sidebar-link">Gateway</a></li><li><a href="/k8s-note/istio/crds/service-entry.html" class="sidebar-link">ServiceEntry</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="destinationrule"><a href="#destinationrule" class="header-anchor">#</a> DestinationRule</h1> <p></p><div class="table-of-contents"><ul><li><a href="#简介">简介</a></li><li><a href="#基本配置">基本配置</a></li><li><a href="#subset">Subset</a></li><li><a href="#traffic-policy">Traffic Policy</a><ul><li><a href="#connectionpool">ConnectionPool</a></li><li><a href="#loadbalancer">LoadBalancer</a></li><li><a href="#outlierdetection">OutlierDetection</a></li><li><a href="#根据端口设置">根据端口设置</a></li></ul></li><li><a href="#参考">参考</a></li></ul></div><p></p> <h2 id="简介"><a href="#简介" class="header-anchor">#</a> 简介</h2> <p>Destination Rule 定义的是流量经过路由后，访问服务的策略集。所配置的信息包括：</p> <ul><li>负载均衡策略</li> <li>连接池配置</li> <li>服务异常检测</li></ul> <h2 id="基本配置"><a href="#基本配置" class="header-anchor">#</a> 基本配置</h2> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> bookinfo<span class="token punctuation">-</span>ratings
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> ratings.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+      <span class="token key atrule">simple</span><span class="token punctuation">:</span> LEAST_CONN
+  <span class="token key atrule">subsets</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> testversion
+    <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">version</span><span class="token punctuation">:</span> v3
+    <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+      <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+        <span class="token key atrule">simple</span><span class="token punctuation">:</span> ROUND_ROBIN
+</code></pre></div><p>其中：</p> <ul><li><code>spec.host</code> 是 k8s 中的 Service 名称，可以使用全称例如 <code>ratings.prod.svc.cluster.local</code>，也可以使用缩写，例如 <code>ratings.prod</code></li> <li><code>spec.trafficPolicy</code> 配置了流量策略。包含负载均衡配置，连接池配置以及服务异常检测配置</li> <li><code>spec.subsets</code> 配置了服务的一组子集，例如同一服务的不同版本。每个子集可以单独配置自己的流量策略</li></ul> <h2 id="subset"><a href="#subset" class="header-anchor">#</a> Subset</h2> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> bookinfo<span class="token punctuation">-</span>ratings
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> ratings.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+      <span class="token key atrule">simple</span><span class="token punctuation">:</span> LEAST_CONN
+  <span class="token key atrule">subsets</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> testversion
+    <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">version</span><span class="token punctuation">:</span> v3
+    <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+      <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+        <span class="token key atrule">simple</span><span class="token punctuation">:</span> ROUND_ROBIN
+</code></pre></div><p>Subset 定义了服务的一组子集。其中：</p> <ul><li><code>labels</code> 用于选择服务的实例（Pod）</li> <li><code>trafficPolicy</code> 配置该 Subset 的流量策略</li></ul> <h2 id="traffic-policy"><a href="#traffic-policy" class="header-anchor">#</a> Traffic Policy</h2> <h3 id="connectionpool"><a href="#connectionpool" class="header-anchor">#</a> ConnectionPool</h3> <p>支持 <code>tcp</code> 和 <code>http</code> 配置。示例如下：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> bookinfo<span class="token punctuation">-</span>redis
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> myredissrv.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">connectionPool</span><span class="token punctuation">:</span>
+      <span class="token key atrule">tcp</span><span class="token punctuation">:</span>
+        <span class="token key atrule">maxConnections</span><span class="token punctuation">:</span> <span class="token number">100</span>
+        <span class="token key atrule">connectTimeout</span><span class="token punctuation">:</span> 30ms
+        <span class="token key atrule">tcpKeepalive</span><span class="token punctuation">:</span>
+          <span class="token key atrule">time</span><span class="token punctuation">:</span> 7200s
+          <span class="token key atrule">interval</span><span class="token punctuation">:</span> 75s
+</code></pre></div><h3 id="loadbalancer"><a href="#loadbalancer" class="header-anchor">#</a> LoadBalancer</h3> <p>负载均衡策略分为两类：<code>simple</code> 和 <code>consistentHash</code>。</p> <h4 id="simple"><a href="#simple" class="header-anchor">#</a> simple</h4> <p>simple 的负载均衡策略配置如下：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> bookinfo<span class="token punctuation">-</span>ratings
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> ratings.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+      <span class="token key atrule">simple</span><span class="token punctuation">:</span> ROUND_ROBIN
+</code></pre></div><p>目前支持的负载均衡策略有 <code>ROUND_ROBIN</code>，<code>LEAST_CONN</code>，<code>RANDOM</code>，<code>PASSTHROUGH</code>。</p> <h4 id="consistenthash"><a href="#consistenthash" class="header-anchor">#</a> consistentHash</h4> <p>一致性哈希支持基于 Header，Cookie 以及源 IP。例如基于 Cookie 的配置如下：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> bookinfo<span class="token punctuation">-</span>ratings
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> ratings.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+      <span class="token key atrule">consistentHash</span><span class="token punctuation">:</span>
+        <span class="token key atrule">httpCookie</span><span class="token punctuation">:</span>
+          <span class="token key atrule">name</span><span class="token punctuation">:</span> user
+          <span class="token key atrule">ttl</span><span class="token punctuation">:</span> 0s
+</code></pre></div><h3 id="outlierdetection"><a href="#outlierdetection" class="header-anchor">#</a> OutlierDetection</h3> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> reviews<span class="token punctuation">-</span>cb<span class="token punctuation">-</span>policy
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> reviews.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">connectionPool</span><span class="token punctuation">:</span>
+      <span class="token key atrule">tcp</span><span class="token punctuation">:</span>
+        <span class="token key atrule">maxConnections</span><span class="token punctuation">:</span> <span class="token number">100</span>
+      <span class="token key atrule">http</span><span class="token punctuation">:</span>
+        <span class="token key atrule">http2MaxRequests</span><span class="token punctuation">:</span> <span class="token number">1000</span>
+        <span class="token key atrule">maxRequestsPerConnection</span><span class="token punctuation">:</span> <span class="token number">10</span>
+    <span class="token key atrule">outlierDetection</span><span class="token punctuation">:</span>
+      <span class="token key atrule">consecutiveErrors</span><span class="token punctuation">:</span> <span class="token number">7</span>
+      <span class="token key atrule">interval</span><span class="token punctuation">:</span> 5m
+      <span class="token key atrule">baseEjectionTime</span><span class="token punctuation">:</span> 15m
+</code></pre></div><h3 id="根据端口设置"><a href="#根据端口设置" class="header-anchor">#</a> 根据端口设置</h3> <p>可以针对不同的端口，设置不同的流量策略。例如：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DestinationRule
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> bookinfo<span class="token punctuation">-</span>ratings<span class="token punctuation">-</span>port
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span> ratings.prod.svc.cluster.local
+  <span class="token key atrule">trafficPolicy</span><span class="token punctuation">:</span> <span class="token comment"># Apply to all ports</span>
+    <span class="token key atrule">portLevelSettings</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">port</span><span class="token punctuation">:</span>
+        <span class="token key atrule">number</span><span class="token punctuation">:</span> <span class="token number">80</span>
+      <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+        <span class="token key atrule">simple</span><span class="token punctuation">:</span> LEAST_CONN
+    <span class="token punctuation">-</span> <span class="token key atrule">port</span><span class="token punctuation">:</span>
+        <span class="token key atrule">number</span><span class="token punctuation">:</span> <span class="token number">9080</span>
+      <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>
+        <span class="token key atrule">simple</span><span class="token punctuation">:</span> ROUND_ROBIN
+</code></pre></div><h2 id="参考"><a href="#参考" class="header-anchor">#</a> 参考</h2> <ul><li><a href="https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/" target="_blank" rel="noopener noreferrer">Destination Rule<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/syaning/k8s-note/edit/master/istio/crds/destination-rule.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">12/3/2020, 6:00:45 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/k8s-note/istio/setup/example.html" class="prev">
+        Example
+      </a></span> <span class="next"><a href="/k8s-note/istio/crds/virtual-service.html">
+        VirtualService
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/k8s-note/assets/js/app.dbdda441.js" defer></script><script src="/k8s-note/assets/js/2.7eb27d3f.js" defer></script><script src="/k8s-note/assets/js/16.f9a9bbc3.js" defer></script>
+  </body>
+</html>

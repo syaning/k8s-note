@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Persistent Volume | K8s Notes</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/k8s-note/assets/css/0.styles.7b106626.css" as="style"><link rel="preload" href="/k8s-note/assets/js/app.dbdda441.js" as="script"><link rel="preload" href="/k8s-note/assets/js/2.7eb27d3f.js" as="script"><link rel="preload" href="/k8s-note/assets/js/46.443a9dab.js" as="script"><link rel="prefetch" href="/k8s-note/assets/js/10.73617207.js"><link rel="prefetch" href="/k8s-note/assets/js/11.10bd6547.js"><link rel="prefetch" href="/k8s-note/assets/js/12.a735ef23.js"><link rel="prefetch" href="/k8s-note/assets/js/13.7eeef935.js"><link rel="prefetch" href="/k8s-note/assets/js/14.4950affd.js"><link rel="prefetch" href="/k8s-note/assets/js/15.9f53e9ec.js"><link rel="prefetch" href="/k8s-note/assets/js/16.f9a9bbc3.js"><link rel="prefetch" href="/k8s-note/assets/js/17.abd6ba53.js"><link rel="prefetch" href="/k8s-note/assets/js/18.cc9785d8.js"><link rel="prefetch" href="/k8s-note/assets/js/19.fe40932e.js"><link rel="prefetch" href="/k8s-note/assets/js/20.cafa9da6.js"><link rel="prefetch" href="/k8s-note/assets/js/21.04ae71f5.js"><link rel="prefetch" href="/k8s-note/assets/js/22.60a73f3d.js"><link rel="prefetch" href="/k8s-note/assets/js/23.a87681d4.js"><link rel="prefetch" href="/k8s-note/assets/js/24.a436133f.js"><link rel="prefetch" href="/k8s-note/assets/js/25.29bf5d48.js"><link rel="prefetch" href="/k8s-note/assets/js/26.4c6fbe53.js"><link rel="prefetch" href="/k8s-note/assets/js/27.a2384463.js"><link rel="prefetch" href="/k8s-note/assets/js/28.9df3df90.js"><link rel="prefetch" href="/k8s-note/assets/js/29.261caceb.js"><link rel="prefetch" href="/k8s-note/assets/js/3.6c481844.js"><link rel="prefetch" href="/k8s-note/assets/js/30.f2cc12ff.js"><link rel="prefetch" href="/k8s-note/assets/js/31.7431be70.js"><link rel="prefetch" href="/k8s-note/assets/js/32.37604ed6.js"><link rel="prefetch" href="/k8s-note/assets/js/33.333c32f7.js"><link rel="prefetch" href="/k8s-note/assets/js/34.ef0017bb.js"><link rel="prefetch" href="/k8s-note/assets/js/35.128101ae.js"><link rel="prefetch" href="/k8s-note/assets/js/36.2dea94ee.js"><link rel="prefetch" href="/k8s-note/assets/js/37.61aadd91.js"><link rel="prefetch" href="/k8s-note/assets/js/38.57c0449d.js"><link rel="prefetch" href="/k8s-note/assets/js/39.f65ae849.js"><link rel="prefetch" href="/k8s-note/assets/js/4.04458bdc.js"><link rel="prefetch" href="/k8s-note/assets/js/40.a452f293.js"><link rel="prefetch" href="/k8s-note/assets/js/41.2f459375.js"><link rel="prefetch" href="/k8s-note/assets/js/42.853dba7e.js"><link rel="prefetch" href="/k8s-note/assets/js/43.8385464d.js"><link rel="prefetch" href="/k8s-note/assets/js/44.e21bb4f3.js"><link rel="prefetch" href="/k8s-note/assets/js/45.0cfa0906.js"><link rel="prefetch" href="/k8s-note/assets/js/47.7ca01a39.js"><link rel="prefetch" href="/k8s-note/assets/js/48.d20b3ad1.js"><link rel="prefetch" href="/k8s-note/assets/js/49.4b3ad4f0.js"><link rel="prefetch" href="/k8s-note/assets/js/5.fc791712.js"><link rel="prefetch" href="/k8s-note/assets/js/50.f109d804.js"><link rel="prefetch" href="/k8s-note/assets/js/51.116368dd.js"><link rel="prefetch" href="/k8s-note/assets/js/52.eec3625c.js"><link rel="prefetch" href="/k8s-note/assets/js/53.2119f1f2.js"><link rel="prefetch" href="/k8s-note/assets/js/54.44f81280.js"><link rel="prefetch" href="/k8s-note/assets/js/55.0ed61643.js"><link rel="prefetch" href="/k8s-note/assets/js/56.8a41ae6c.js"><link rel="prefetch" href="/k8s-note/assets/js/57.df1e26c5.js"><link rel="prefetch" href="/k8s-note/assets/js/58.3110f76e.js"><link rel="prefetch" href="/k8s-note/assets/js/59.f595ea8c.js"><link rel="prefetch" href="/k8s-note/assets/js/6.2cb68e23.js"><link rel="prefetch" href="/k8s-note/assets/js/60.20456f68.js"><link rel="prefetch" href="/k8s-note/assets/js/7.6fd5dc50.js"><link rel="prefetch" href="/k8s-note/assets/js/8.9e8d07cd.js"><link rel="prefetch" href="/k8s-note/assets/js/9.14ea67dc.js">
+    <link rel="stylesheet" href="/k8s-note/assets/css/0.styles.7b106626.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/k8s-note/" class="home-link router-link-active"><img src="/k8s-note/logo.svg" alt="K8s Notes" class="logo"> <span class="site-name can-hide">K8s Notes</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Notes" class="dropdown-title"><span class="title">Notes</span> <span class="arrow down"></span></button> <button type="button" aria-label="Notes" class="mobile-dropdown-title"><span class="title">Notes</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/k8s-note/k8s/" class="nav-link router-link-active">
+  Kubernetes
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/docker/image/" class="nav-link">
+  Docker
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/ingress-nginx/" class="nav-link">
+  Ingress Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/envoy/" class="nav-link">
+  Envoy
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/istio/" class="nav-link">
+  Istio
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/prometheus/" class="nav-link">
+  Prometheus
+</a></li></ul></div></div> <a href="https://github.com/syaning/k8s-note" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Notes" class="dropdown-title"><span class="title">Notes</span> <span class="arrow down"></span></button> <button type="button" aria-label="Notes" class="mobile-dropdown-title"><span class="title">Notes</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/k8s-note/k8s/" class="nav-link router-link-active">
+  Kubernetes
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/docker/image/" class="nav-link">
+  Docker
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/ingress-nginx/" class="nav-link">
+  Ingress Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/envoy/" class="nav-link">
+  Envoy
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/istio/" class="nav-link">
+  Istio
+</a></li><li class="dropdown-item"><!----> <a href="/k8s-note/prometheus/" class="nav-link">
+  Prometheus
+</a></li></ul></div></div> <a href="https://github.com/syaning/k8s-note" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>资源对象</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/k8s-note/k8s/objects/" aria-current="page" class="sidebar-link">简介</a></li><li><a href="/k8s-note/k8s/objects/pod.html" class="sidebar-link">Pod</a></li><li><a href="/k8s-note/k8s/objects/horizontal-pod-autoscaler.html" class="sidebar-link">HorizontalPodAutoscaler</a></li><li><a href="/k8s-note/k8s/objects/node.html" class="sidebar-link">Node</a></li><li><a href="/k8s-note/k8s/objects/namespace.html" class="sidebar-link">Namespace</a></li><li><a href="/k8s-note/k8s/objects/component-status.html" class="sidebar-link">ComponentStatus</a></li><li><a href="/k8s-note/k8s/objects/event.html" class="sidebar-link">Event</a></li><li><a href="/k8s-note/k8s/objects/replica-set.html" class="sidebar-link">ReplicaSet</a></li><li><a href="/k8s-note/k8s/objects/deployment.html" class="sidebar-link">Deployment</a></li><li><a href="/k8s-note/k8s/objects/stateful-set.html" class="sidebar-link">StatefulSet</a></li><li><a href="/k8s-note/k8s/objects/daemon-set.html" class="sidebar-link">DaemonSet</a></li><li><a href="/k8s-note/k8s/objects/configmap.html" class="sidebar-link">ConfigMap</a></li><li><a href="/k8s-note/k8s/objects/secret.html" class="sidebar-link">Secret</a></li><li><a href="/k8s-note/k8s/objects/service-account.html" class="sidebar-link">ServiceAccount</a></li><li><a href="/k8s-note/k8s/objects/service.html" class="sidebar-link">Service</a></li><li><a href="/k8s-note/k8s/objects/endpoints.html" class="sidebar-link">Endpoints</a></li><li><a href="/k8s-note/k8s/objects/ingress.html" class="sidebar-link">Ingress</a></li><li><a href="/k8s-note/k8s/objects/persistent-volume.html" aria-current="page" class="active sidebar-link">Persistent Volume</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/k8s-note/k8s/objects/persistent-volume.html#volume" class="sidebar-link">Volume</a></li><li class="sidebar-sub-header"><a href="/k8s-note/k8s/objects/persistent-volume.html#生命周期" class="sidebar-link">生命周期</a></li><li class="sidebar-sub-header"><a href="/k8s-note/k8s/objects/persistent-volume.html#参考" class="sidebar-link">参考</a></li></ul></li><li><a href="/k8s-note/k8s/objects/persistent-volume-claim.html" class="sidebar-link">PersistentVolumeClaim</a></li><li><a href="/k8s-note/k8s/objects/storage-class.html" class="sidebar-link">Storage Class</a></li><li><a href="/k8s-note/k8s/objects/job.html" class="sidebar-link">Job</a></li><li><a href="/k8s-note/k8s/objects/cronjob.html" class="sidebar-link">Cronjob</a></li><li><a href="/k8s-note/k8s/objects/role.html" class="sidebar-link">Role</a></li><li><a href="/k8s-note/k8s/objects/cluster-role.html" class="sidebar-link">ClusterRole</a></li><li><a href="/k8s-note/k8s/objects/role-binding.html" class="sidebar-link">RoleBinding</a></li><li><a href="/k8s-note/k8s/objects/cluster-role-binding.html" class="sidebar-link">ClusterRoleBinding</a></li><li><a href="/k8s-note/k8s/objects/resource-quota.html" class="sidebar-link">ResourceQuota</a></li><li><a href="/k8s-note/k8s/objects/pod-disruption-budget.html" class="sidebar-link">PodDisruptionBudget</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Guides</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Tools</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="persistent-volume"><a href="#persistent-volume" class="header-anchor">#</a> Persistent Volume</h1> <p></p><div class="table-of-contents"><ul><li><a href="#volume">Volume</a><ul><li><a href="#configmap">configMap</a></li><li><a href="#secret">secret</a></li><li><a href="#downwardapi">downwardAPI</a></li><li><a href="#emptydir">emptyDir</a></li><li><a href="#hostpath">hostPath</a></li><li><a href="#local">local</a></li><li><a href="#persistentvolumeclaim">persistentVolumeClaim</a></li><li><a href="#projected">projected</a></li></ul></li><li><a href="#生命周期">生命周期</a><ul><li><a href="#provisioning">Provisioning</a></li><li><a href="#binding">Binding</a></li><li><a href="#using">Using</a></li></ul></li><li><a href="#参考">参考</a></li></ul></div><p></p> <h2 id="volume"><a href="#volume" class="header-anchor">#</a> Volume</h2> <p>以下列出几种基础且常用的 Volume。更多详情参考 <a href="https://kubernetes.io/docs/concepts/storage/volumes/" target="_blank" rel="noopener noreferrer">Volumes<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p> <h3 id="configmap"><a href="#configmap" class="header-anchor">#</a> configMap</h3> <p>参考 <a href="/k8s-note/k8s/objects/configmap.html">ConfigMap</a>。</p> <h3 id="secret"><a href="#secret" class="header-anchor">#</a> secret</h3> <p>参考 <a href="/k8s-note/k8s/objects/secret.html">Secret</a>。</p> <h3 id="downwardapi"><a href="#downwardapi" class="header-anchor">#</a> downwardAPI</h3> <p>downwardAPI 可以将 Pod 或 Container 的字段作为 Volume 来使用，从而可以让运行的容器来获取这些信息。更多详情可参考 <a href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/" target="_blank" rel="noopener noreferrer">Expose Pod Information to Containers Through Files<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+      <span class="token key atrule">annotations</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app-owner</span><span class="token punctuation">:</span> alex
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span><span class="token number">1.16</span>
+        <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+          <span class="token key atrule">requests</span><span class="token punctuation">:</span>
+            <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token string">&quot;100m&quot;</span>
+            <span class="token key atrule">memory</span><span class="token punctuation">:</span> <span class="token string">&quot;32Mi&quot;</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> podinfo
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/podinfo          
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> podinfo
+        <span class="token key atrule">downwardAPI</span><span class="token punctuation">:</span>
+          <span class="token key atrule">items</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">path</span><span class="token punctuation">:</span> labels
+            <span class="token key atrule">fieldRef</span><span class="token punctuation">:</span>
+              <span class="token key atrule">fieldPath</span><span class="token punctuation">:</span> metadata.labels
+          <span class="token punctuation">-</span> <span class="token key atrule">path</span><span class="token punctuation">:</span> annotations
+            <span class="token key atrule">fieldRef</span><span class="token punctuation">:</span>
+              <span class="token key atrule">fieldPath</span><span class="token punctuation">:</span> metadata.annotations
+          <span class="token punctuation">-</span> <span class="token key atrule">path</span><span class="token punctuation">:</span> cpu_request
+            <span class="token key atrule">resourceFieldRef</span><span class="token punctuation">:</span>
+              <span class="token key atrule">containerName</span><span class="token punctuation">:</span> nginx
+              <span class="token key atrule">resource</span><span class="token punctuation">:</span> requests.cpu
+              <span class="token key atrule">divisor</span><span class="token punctuation">:</span> 1m
+          <span class="token punctuation">-</span> <span class="token key atrule">path</span><span class="token punctuation">:</span> mem_request
+            <span class="token key atrule">resourceFieldRef</span><span class="token punctuation">:</span>
+              <span class="token key atrule">containerName</span><span class="token punctuation">:</span> nginx
+              <span class="token key atrule">resource</span><span class="token punctuation">:</span> requests.memory
+              <span class="token key atrule">divisor</span><span class="token punctuation">:</span> 1Mi
+</code></pre></div><h3 id="emptydir"><a href="#emptydir" class="header-anchor">#</a> emptyDir</h3> <p>emptyDir 在 Pod 被调度到 Node 上的时候创建，初始为空目录，并且存在于 Pod 的生命周期内。当 Pod 从 Node 上移除后，emptyDir 会被永久删除。主要适用于存放一些临时文件，而非持久化的数据。</p> <p>例如：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span><span class="token number">1.16</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> data
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /data
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> data
+        <span class="token key atrule">emptyDir</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><p>通常来说，emptyDir 可以使用任何存储介质，当然，也可以设置 <code>emptyDir.menium: Memory</code> 来使用 tmpfs（基于内存）。</p> <h3 id="hostpath"><a href="#hostpath" class="header-anchor">#</a> hostPath</h3> <p>可以将 Node 上的文件或目录，挂载到 Pod 中。通常需要将一些系统文件挂载到 Pod 内部时会用到。在使用 <code>hostPath</code> 的情况下，即使 Pod 被删除，hostPath 的文件依然存在。</p> <p>例如以下例子可以让 Pod 内使用当地时间：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span><span class="token number">1.16</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> timezone
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /ect/timezone
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> localtime
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/localtime
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> timezone
+        <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> /etc/timezone
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> localtime
+        <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> /etc/localtime
+</code></pre></div><p><code>hostPath</code> 除了必需的 <code>path</code> 属性外，还可以设置 <code>type</code> 属性，详细可参考 <a href="https://kubernetes.io/docs/concepts/storage/volumes/#hostpath" target="_blank" rel="noopener noreferrer">emptyDir<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p> <h3 id="local"><a href="#local" class="header-anchor">#</a> local</h3> <p><code>local</code> Volume 表示一个磁盘，分区或者一个目录。只能用于 static provisioning，不支持 dynamic provisioning（参考 <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#provisioning" target="_blank" rel="noopener noreferrer">Provisioning<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）。需要结合 <code>nodeAffinity</code> 特性来使用，因此相比于 <code>hostPath</code> 方式，不用手动指定 Pod 所应该被调度的 Node。</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> PersistentVolume
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> local<span class="token punctuation">-</span>pv
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">capacity</span><span class="token punctuation">:</span>
+    <span class="token key atrule">storage</span><span class="token punctuation">:</span> 10Gi
+  <span class="token key atrule">volumeMode</span><span class="token punctuation">:</span> Filesystem
+  <span class="token key atrule">accessModes</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ReadWriteOnce
+  <span class="token key atrule">persistentVolumeReclaimPolicy</span><span class="token punctuation">:</span> Delete
+  <span class="token key atrule">storageClassName</span><span class="token punctuation">:</span> local<span class="token punctuation">-</span>storage
+  <span class="token key atrule">local</span><span class="token punctuation">:</span>
+    <span class="token key atrule">path</span><span class="token punctuation">:</span> /opt/local<span class="token punctuation">-</span>pv
+  <span class="token key atrule">nodeAffinity</span><span class="token punctuation">:</span>
+    <span class="token key atrule">required</span><span class="token punctuation">:</span>
+      <span class="token key atrule">nodeSelectorTerms</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> kubernetes.io/hostname
+          <span class="token key atrule">operator</span><span class="token punctuation">:</span> In
+          <span class="token key atrule">values</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> test<span class="token punctuation">-</span><span class="token number">03</span>
+
+<span class="token punctuation">---</span>
+
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> PersistentVolumeClaim
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>pvc
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">accessModes</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ReadWriteOnce
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+    <span class="token key atrule">requests</span><span class="token punctuation">:</span>
+      <span class="token key atrule">storage</span><span class="token punctuation">:</span> 1Gi
+  <span class="token key atrule">storageClassName</span><span class="token punctuation">:</span> local<span class="token punctuation">-</span>storage
+
+<span class="token punctuation">---</span>
+
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>1.17.2
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> test
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /opt/data
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> test
+        <span class="token key atrule">persistentVolumeClaim</span><span class="token punctuation">:</span>
+          <span class="token key atrule">claimName</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>pvc
+</code></pre></div><p>此外，Rancher 提供的 <a href="https://github.com/rancher/local-path-provisioner" target="_blank" rel="noopener noreferrer">local-path-provisioner<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 与 <code>local</code> 比较类似，但是支持 dynamic provisioning.</p> <h3 id="persistentvolumeclaim"><a href="#persistentvolumeclaim" class="header-anchor">#</a> persistentVolumeClaim</h3> <p>参考 <a href="/k8s-note/k8s/objects/persistent-volume-claim.html">Persistent Volume Claim</a>。</p> <h3 id="projected"><a href="#projected" class="header-anchor">#</a> projected</h3> <p>一般而言，多个 Volume 不能够挂载到同一个 MoutPath，例如如下就会报错：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ConfigMap
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+<span class="token key atrule">data</span><span class="token punctuation">:</span>
+  <span class="token key atrule">mysql-host</span><span class="token punctuation">:</span> mysql.middlewares.svc.cluster.local
+
+<span class="token punctuation">---</span>
+
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Secret
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+<span class="token key atrule">data</span><span class="token punctuation">:</span>
+  <span class="token key atrule">mysql-pass</span><span class="token punctuation">:</span> cm9vdA==
+
+<span class="token punctuation">---</span>
+
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span><span class="token number">1.16</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /ect/mysql
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/mysql
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+        <span class="token key atrule">configMap</span><span class="token punctuation">:</span>
+          <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+        <span class="token key atrule">secret</span><span class="token punctuation">:</span>
+          <span class="token key atrule">secretName</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+</code></pre></div><p>可以使用 <code>subPath</code> 的方式：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span><span class="token number">1.16</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/mysql/mysql<span class="token punctuation">-</span>host
+          <span class="token key atrule">subPath</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>host
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/mysql/mysql<span class="token punctuation">-</span>pass
+          <span class="token key atrule">subPath</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>pass
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+        <span class="token key atrule">configMap</span><span class="token punctuation">:</span>
+          <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+        <span class="token key atrule">secret</span><span class="token punctuation">:</span>
+          <span class="token key atrule">secretName</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+</code></pre></div><p>也可以使用 <code>projected</code> Volume，例如：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span><span class="token number">1.16</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/mysql
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql
+        <span class="token key atrule">projected</span><span class="token punctuation">:</span>
+          <span class="token key atrule">sources</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">configMap</span><span class="token punctuation">:</span>
+              <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>conf
+          <span class="token punctuation">-</span> <span class="token key atrule">secret</span><span class="token punctuation">:</span>
+              <span class="token key atrule">name</span><span class="token punctuation">:</span> mysql<span class="token punctuation">-</span>secret
+</code></pre></div><p><code>projected</code> Volume 支持：</p> <ul><li><code>secret</code></li> <li><code>configMap</code></li> <li><code>downwardAPI</code></li> <li><code>serviceAccountToken</code></li></ul> <h2 id="生命周期"><a href="#生命周期" class="header-anchor">#</a> 生命周期</h2> <h3 id="provisioning"><a href="#provisioning" class="header-anchor">#</a> Provisioning</h3> <h3 id="binding"><a href="#binding" class="header-anchor">#</a> Binding</h3> <h3 id="using"><a href="#using" class="header-anchor">#</a> Using</h3> <h2 id="参考"><a href="#参考" class="header-anchor">#</a> 参考</h2> <ul><li><a href="https://kubernetes.io/docs/concepts/storage/volumes/" target="_blank" rel="noopener noreferrer">Volumes<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/" target="_blank" rel="noopener noreferrer">Persistent Volumes<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/syaning/k8s-note/edit/master/k8s/objects/persistent-volume.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">12/3/2020, 6:00:45 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/k8s-note/k8s/objects/ingress.html" class="prev">
+        Ingress
+      </a></span> <span class="next"><a href="/k8s-note/k8s/objects/persistent-volume-claim.html">
+        PersistentVolumeClaim
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/k8s-note/assets/js/app.dbdda441.js" defer></script><script src="/k8s-note/assets/js/2.7eb27d3f.js" defer></script><script src="/k8s-note/assets/js/46.443a9dab.js" defer></script>
+  </body>
+</html>
